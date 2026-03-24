@@ -1,15 +1,14 @@
-import LoginForm from "../../componets/molecules/LoginForm";
+import LoginForm from '../../componets/molecules/LoginForm'
+import { LoginCard, LoginContainer } from './Login.styles'
 
 const Login = () => {
-    return(
-        <div>
-            <div>
-                <h2>
-                    <LoginForm/>
-                </h2>
-            </div>
-        </div>
-    )
+  return (
+    <LoginContainer>
+      <LoginCard>
+        <LoginForm />
+      </LoginCard>
+    </LoginContainer>
+  )
 }
 
-export default Login;
+export default Login

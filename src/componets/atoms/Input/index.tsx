@@ -1,18 +1,15 @@
+import type { ChangeEventHandler } from 'react'
+import { StyledInput } from './Input.styles'
+
 type Props = {
-    placeholder: string;
-    type?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string
+  value?: string
+  type?: string
+  onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
-const Input = ({placeholder, type = "text", onChange}: Props) => {
-    return (
-        <input 
-            type={type} 
-            placeholder={placeholder} 
-            className="border p-2 w-full mb-3"
-            onChange={onChange}
-        />
-    )
+const Input = ({ placeholder, value, type = 'text', onChange }: Props) => {
+  return <StyledInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
 }
 
-export default Input;
+export default Input

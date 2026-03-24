@@ -1,14 +1,17 @@
+import { StyledButton } from './Button.styles'
+
 type Props = {
-   label: string;
-   onClick?: () => void;
+  label: string
+  onClick?: () => void
+  type?: 'button' | 'submit'
 }
 
-const Button = ({label, onClick}: Props) =>{
-    return (
-        <button className="bg-blue-500 text-white p-2 w-full rounded" onClick={onClick}>
-            {label}
-        </button>
-    )
+const Button = ({ label, onClick, type = 'button' }: Props) => {
+  return (
+    <StyledButton type={type} onClick={onClick}>
+      {label}
+    </StyledButton>
+  )
 }
 
-export default Button;
+export default Button

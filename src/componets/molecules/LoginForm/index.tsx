@@ -1,27 +1,46 @@
-import { useState } from "react" //hooks de react
-import Button from "../../atoms/Button"
-import Input from "../../atoms/Input"
-
+import { useState, type FormEvent } from 'react'
+import Button from '../../atoms/Button'
+import Input from '../../atoms/Input'
+import { useAuth } from '../../../context/useAuth'
+import { ErrorText, Form, Title } from './LoginForm.styles'
 
 const LoginForm = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const { login } = useAuth()
 
-    // equivalente
-    // let email = ""
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const success = login(email, password)
 
-    // const setEmail = (e: React.ChangeEvent<HTMLInputElement>) => {email = e.target.value}
-
-    const hendleLogin = () => {
-        console.log("login", email, "password", password)
+    if (!success) {
+      setError('Email y password son obligatorios.')
+      return
     }
 
-    return (
-        <div>
-            <Input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)}/>
-            <Input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
-            <Button label="Login" onClick={hendleLogin}/>
-        </div>
-    )
-} 
-export default LoginForm;
+    setError('')
+  }
+
+  return (
+    <Form onSubmit={handleLogin}>
+      <Title>Iniciar sesion</Title>
+      {error ? <ErrorText>{error}</ErrorText> : null}
+      <Input
+        placeholder='Email'
+        type='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        placeholder='Password'
+        type='password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button label='Login' type='submit' />
+    </Form>
+  )
+}
+
+export default LoginForm
